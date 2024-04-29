@@ -23,19 +23,14 @@ export const makePlayer = (k: KaboomCtx, spawnPoint: { x: number; y: number }) =
 
   // horizontal movement
   k.onKeyDown(key => {
-    switch (key) {
-      case 'left':
-      case 'a':
-        player.direction = 'left';
-        player.flipX = true;
-        player.move(-player.speed, 0);
-        break;
-      case 'right':
-      case 'd':
-        player.direction = 'right';
-        player.flipX = false;
-        player.move(player.speed, 0);
-        break;
+    if (key === 'left' || key === 'a') {
+      player.direction = 'left';
+      player.flipX = true;
+      player.move(-player.speed, 0);
+    } else if (key === 'right' || key === 'd') {
+      player.direction = 'right';
+      player.flipX = false;
+      player.move(player.speed, 0);
     }
   });
 
