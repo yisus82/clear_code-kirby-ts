@@ -1,5 +1,6 @@
 import { BACKGROUND_COLOR, GRAVITY } from './constants';
 import { k } from './kaboomCtx';
+import { makeMap } from './utils';
 
 const gameSetup = async () => {
   k.loadSprite('sprites', '/spritesheet.png', {
@@ -18,9 +19,19 @@ const gameSetup = async () => {
     },
   });
   k.loadSprite('level-1', '/level-1.png');
+  const {
+    map: level1Map,
+    spawnPoints: level1SpawnPoints,
+    error: level1Error,
+  } = await makeMap(k, 'level-1');
+  if (level1Error) {
+    console.error('Error loading map:', level1Error);
+    return;
+  }
   k.scene('level-1', () => {
     k.setGravity(GRAVITY);
     k.add([k.rect(k.width(), k.height()), k.color(k.Color.fromHex(BACKGROUND_COLOR)), k.fixed()]);
+    k.add(level1Map);
   });
   k.go('level-1');
 };
