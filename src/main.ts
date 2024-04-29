@@ -1,4 +1,11 @@
-import { BACKGROUND_COLOR, GRAVITY } from './constants';
+import {
+  BACKGROUND_COLOR,
+  CAMERA_OFFSET_X,
+  CAMERA_OFFSET_Y,
+  CAMERA_SCALE,
+  GRAVITY,
+} from './constants';
+import { makePlayer } from './entities';
 import { k } from './kaboomCtx';
 import { makeMap } from './utils';
 
@@ -32,6 +39,12 @@ const gameSetup = async () => {
     k.setGravity(GRAVITY);
     k.add([k.rect(k.width(), k.height()), k.color(k.Color.fromHex(BACKGROUND_COLOR)), k.fixed()]);
     k.add(level1Map);
+    const player = makePlayer(k, level1SpawnPoints.player[0]);
+    k.add(player);
+    k.camScale(k.vec2(CAMERA_SCALE));
+    k.onUpdate(() => {
+      k.camPos(player.pos.x + CAMERA_OFFSET_X, player.pos.y + CAMERA_OFFSET_Y);
+    });
   });
   k.go('level-1');
 };
