@@ -1,3 +1,4 @@
+import { BACKGROUND_COLOR, GRAVITY } from './constants';
 import { k } from './kaboomCtx';
 
 const gameSetup = async () => {
@@ -16,6 +17,12 @@ const gameSetup = async () => {
       bird: { from: 27, to: 28, speed: 4, loop: true },
     },
   });
+  k.loadSprite('level-1', '/level-1.png');
+  k.scene('level-1', () => {
+    k.setGravity(GRAVITY);
+    k.add([k.rect(k.width(), k.height()), k.color(k.Color.fromHex(BACKGROUND_COLOR)), k.fixed()]);
+  });
+  k.go('level-1');
 };
 
 gameSetup();
