@@ -2,6 +2,7 @@ import { KaboomCtx } from 'kaboom';
 import { PLAYER_HEALTH, PLAYER_JUMP_FORCE, PLAYER_SPEED, SCALE } from './constants';
 
 export const makePlayer = (k: KaboomCtx, spawnPoint: { x: number; y: number }) => {
+  // create player
   const player = k.make([
     k.sprite('sprites', { anim: 'kirbyIdle' }),
     k.area({ shape: new k.Rect(k.vec2(4, 5.9), 8, 10) }),
@@ -19,6 +20,22 @@ export const makePlayer = (k: KaboomCtx, spawnPoint: { x: number; y: number }) =
     },
     'player',
   ]);
+
+  // horizontal movement
+  k.onKeyDown(key => {
+    switch (key) {
+      case 'left':
+        player.direction = 'left';
+        player.flipX = true;
+        player.move(-player.speed, 0);
+        break;
+      case 'right':
+        player.direction = 'right';
+        player.flipX = false;
+        player.move(player.speed, 0);
+        break;
+    }
+  });
 
   return player;
 };
