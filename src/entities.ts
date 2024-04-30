@@ -162,7 +162,7 @@ export const makePlayer = (k: KaboomCtx, spawnPoint: { x: number; y: number }) =
   return player;
 };
 
-export function makeInhalable(k: KaboomCtx, enemy: GameObj) {
+export const makeInhalable = (k: KaboomCtx, enemy: GameObj) => {
   enemy.onCollide('inhaleZone', () => {
     enemy.isInhalable = true;
   });
@@ -186,9 +186,9 @@ export function makeInhalable(k: KaboomCtx, enemy: GameObj) {
       }
     }
   });
-}
+};
 
-export function makeFlameEnemy(k: KaboomCtx, spawnPoint: { x: number; y: number }) {
+export const makeFlameEnemy = (k: KaboomCtx, spawnPoint: { x: number; y: number }) => {
   // create flame
   const flame = k.add([
     k.sprite('sprites', { anim: 'flame' }),
@@ -224,9 +224,9 @@ export function makeFlameEnemy(k: KaboomCtx, spawnPoint: { x: number; y: number 
   });
 
   return flame;
-}
+};
 
-export function makeGuyEnemy(k: KaboomCtx, spawnPoint: { x: number; y: number }) {
+export const makeGuyEnemy = (k: KaboomCtx, spawnPoint: { x: number; y: number }) => {
   // create guy
   const guy = k.add([
     k.sprite('sprites', { anim: 'guyWalk' }),
@@ -273,9 +273,9 @@ export function makeGuyEnemy(k: KaboomCtx, spawnPoint: { x: number; y: number })
   });
 
   return guy;
-}
+};
 
-export function makeBirdEnemy(k: KaboomCtx, spawnPoint: { x: number; y: number }) {
+export const makeBirdEnemy = (k: KaboomCtx, spawnPoint: { x: number; y: number }) => {
   // randomize speed
   const speed = k.choose(BIRD_POSSIBLE_SPEEDS);
 
@@ -298,4 +298,4 @@ export function makeBirdEnemy(k: KaboomCtx, spawnPoint: { x: number; y: number }
   makeInhalable(k, bird);
 
   return bird;
-}
+};
