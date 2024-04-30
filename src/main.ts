@@ -1,11 +1,12 @@
 import {
   BACKGROUND_COLOR,
+  BIRD_COUNT,
   CAMERA_OFFSET_X,
   CAMERA_OFFSET_Y,
   CAMERA_SCALE,
   GRAVITY,
 } from './constants';
-import { makePlayer } from './entities';
+import { makeBirdEnemy, makeFlameEnemy, makeGuyEnemy, makePlayer } from './entities';
 import { k } from './kaboomCtx';
 import { makeMap } from './utils';
 
@@ -55,6 +56,28 @@ const gameSetup = async () => {
     k.onUpdate(() => {
       k.camPos(player.pos.x + CAMERA_OFFSET_X, player.pos.y + CAMERA_OFFSET_Y);
     });
+    // add enemies
+    // Flame enemies
+    if (level1SpawnPoints.flame) {
+      level1SpawnPoints.flame.forEach(spawnPoint => {
+        makeFlameEnemy(k, spawnPoint);
+      });
+    }
+    // Guy enemies
+    if (level1SpawnPoints.guy) {
+      level1SpawnPoints.guy.forEach(spawnPoint => {
+        makeGuyEnemy(k, spawnPoint);
+      });
+    }
+
+    // Bird enemies
+    if (level1SpawnPoints.bird) {
+      level1SpawnPoints.bird.forEach(spawnPoint => {
+        k.loop(BIRD_COUNT, () => {
+          makeBirdEnemy(k, spawnPoint);
+        });
+      });
+    }
   });
 
   // start game
