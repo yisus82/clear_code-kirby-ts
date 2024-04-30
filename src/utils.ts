@@ -4,7 +4,7 @@ import { TiledMap } from './types';
 
 export const makeMap = async (k: KaboomCtx, name: string) => {
   let error = null;
-  const mapData: TiledMap = await fetch(`/${name}.json`)
+  const mapData: TiledMap = await fetch(`./${name}.json`)
     .then(res => res.json())
     .catch(e => (error = e));
   const map = k.make([k.sprite(name), k.scale(SCALE), k.pos(0)]);

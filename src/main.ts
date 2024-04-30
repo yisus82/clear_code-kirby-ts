@@ -13,7 +13,7 @@ import { makeMap } from './utils';
 
 const gameSetup = async () => {
   // load animations
-  k.loadSprite('sprites', '/spritesheet.png', {
+  k.loadSprite('sprites', './spritesheet.png', {
     sliceX: 9,
     sliceY: 10,
     anims: {
@@ -30,7 +30,7 @@ const gameSetup = async () => {
   });
 
   // load level 1
-  k.loadSprite('level-1', '/level-1.png');
+  k.loadSprite('level-1', './level-1.png');
   const {
     map: level1Map,
     spawnPoints: level1SpawnPoints,
@@ -85,7 +85,7 @@ const gameSetup = async () => {
   });
 
   // load level 2
-  k.loadSprite('level-2', '/level-2.png');
+  k.loadSprite('level-2', './level-2.png');
   const {
     map: level2Layout,
     spawnPoints: level2SpawnPoints,
