@@ -10,6 +10,9 @@ import {
   PLAYER_JUMP_FORCE,
   PLAYER_SPEED,
   SCALE,
+  SHOOTING_STAR_OFFSET_X,
+  SHOOTING_STAR_OFFSET_Y,
+  SHOOTING_STAR_SPEED,
 } from './constants';
 import { globalGameState } from './state';
 
@@ -130,11 +133,15 @@ export const makePlayer = (k: KaboomCtx, spawnPoint: { x: number; y: number }) =
         }),
         k.area({ shape: new k.Rect(k.vec2(5, 4), 6, 6) }),
         k.pos(
-          player.direction === 'left' ? player.pos.x - 80 : player.pos.x + 80,
-          player.pos.y + 5
+          player.direction === 'left'
+            ? player.pos.x - SHOOTING_STAR_OFFSET_X
+            : player.pos.x + SHOOTING_STAR_OFFSET_X,
+          player.pos.y + SHOOTING_STAR_OFFSET_Y
         ),
         k.scale(SCALE),
-        player.direction === 'left' ? k.move(k.LEFT, 800) : k.move(k.RIGHT, 800),
+        player.direction === 'left'
+          ? k.move(k.LEFT, SHOOTING_STAR_SPEED)
+          : k.move(k.RIGHT, SHOOTING_STAR_SPEED),
         'shootingStar',
       ]);
       shootingStar.onCollide('platform', () => k.destroy(shootingStar));

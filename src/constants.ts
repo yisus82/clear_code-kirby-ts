@@ -25,3 +25,8 @@ export const BIRD_POSSIBLE_SPEEDS = [100, 200, 300];
 export const BIRD_DISTANCE_THRESHOLD = 400;
 export const BIRD_COUNT = 10;
 export const ENEMY_INHALE_FORCE = 800;
+
+// shooting star settings
+export const SHOOTING_STAR_SPEED = 800;
+export const SHOOTING_STAR_OFFSET_X = 80;
+export const SHOOTING_STAR_OFFSET_Y = 5;
