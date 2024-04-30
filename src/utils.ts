@@ -10,6 +10,10 @@ export const makeMap = async (k: KaboomCtx, name: string) => {
   const map = k.make([k.sprite(name), k.scale(SCALE), k.pos(0)]);
   const spawnPoints: { [key: string]: { x: number; y: number }[] } = {};
 
+  if (error) {
+    return { map, spawnPoints, error };
+  }
+
   for (const layer of mapData.layers) {
     const layerObjects = layer.objects ?? [];
     if (layer.name === 'colliders') {

@@ -11,6 +11,7 @@ import {
   PLAYER_SPEED,
   SCALE,
 } from './constants';
+import { globalGameState } from './state';
 
 export const makePlayer = (k: KaboomCtx, spawnPoint: { x: number; y: number }) => {
   // create player
@@ -69,6 +70,8 @@ export const makePlayer = (k: KaboomCtx, spawnPoint: { x: number; y: number }) =
     if (player.hp() <= 0) {
       // destroy player
       k.destroy(player);
+      // load lose scene
+      k.go('lose');
     } else {
       // flash player
       await k.tween(player.opacity, 0, 0.25, val => (player.opacity = val), k.easings.linear);
@@ -141,6 +144,18 @@ export const makePlayer = (k: KaboomCtx, spawnPoint: { x: number; y: number }) =
       player.isInhaling = false;
       player.play('kirbyIdle');
       inhaleEffect.opacity = 0;
+    }
+  });
+
+  // go to next scene
+  player.onCollide('exit', () => {
+    k.go(globalGameState.nextScene);
+  });
+
+  // reset scene
+  player.onUpdate(() => {
+    if (player.pos.y > 2000) {
+      k.go(globalGameState.currentScene);
     }
   });
 
