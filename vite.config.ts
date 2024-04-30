@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-  base: './',
+  base: '/clear_code-kiry-ts',
   build: {
     minify: false,
   },
